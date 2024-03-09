@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
+
 const prisma = new PrismaClient()
 
 const notFitering = async () => {
@@ -16,14 +17,25 @@ const notFitering = async () => {
     // })
     // console.log(result)
 
-    const startWith = await prisma.user.findMany({
+    // const startWith = await prisma.user.findMany({
+    //     where: {
+    //         email: {
+    //             equals: 'rubel@gmail.com'
+    //         }
+    //     }
+    // })
+    // console.log(startWith)
+
+    const selectArray = ['fardin tazbeed', 'rubel']
+    const usrNamesByArray = await prisma.user.findMany({
         where: {
-            email: {
-                equals: 'rubel@gmail.com'
+            userName: {
+                in: selectArray
             }
         }
     })
-    console.log(startWith)
+
+    console.log(usrNamesByArray)
 }
 
 notFitering()
