@@ -19,7 +19,7 @@ const notFitering = async () => {
     const startWith = await prisma.user.findMany({
         where: {
             email: {
-                startsWith: 'r'
+                equals: 'rubel@gmail.com'
             }
         }
     })
