@@ -26,16 +26,34 @@ const notFitering = async () => {
     // })
     // console.log(startWith)
 
-    const selectArray = ['fardin tazbeed', 'rubel']
-    const usrNamesByArray = await prisma.user.findMany({
+    // const selectArray = ['fardin tazbeed', 'rubel']
+    // const usrNamesByArray = await prisma.user.findMany({
+    //     where: {
+    //         userName: {
+    //             in: selectArray
+    //         }
+    //     }
+    // })
+
+    // console.log(usrNamesByArray)
+
+    const indepthDataEqual = await prisma.user.findUnique({
         where: {
-            userName: {
-                in: selectArray
+            id: 3
+        },
+        include: {
+            post: {
+                include: {
+                    postCategory: {
+                        include: {
+                            category: true
+                        }
+                    }
+                }
             }
         }
     })
-
-    console.log(usrNamesByArray)
+    console.dir(indepthDataEqual, { depth: Infinity })
 }
 
 notFitering()
